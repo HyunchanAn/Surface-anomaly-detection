@@ -1,12 +1,12 @@
-# Surface Anomaly Detection Requirements
+# 표면 이상 탐지 시스템 요구사항 (Surface Anomaly Detection Requirements)
 
-## System Requirements
-- OS: Windows 10/11 or Linux
-- GPU: NVIDIA RTX 4060 (Laptop) or better recommended for PatchCore training
-- CUDA: 11.8 or 12.x compatible driver
+## 시스템 요구사항 (System Requirements)
+- 운영체제 (OS): Windows 10/11 또는 Linux
+- GPU: NVIDIA RTX 4060 (노트북) 이상 권장 (PatchCore 학습용)
+- CUDA: 11.8 또는 12.x 호환 드라이버
 
-## Python Dependencies
-Save this as `requirements.txt` and install via `pip install -r requirements.txt`
+## Python 의존성 (Python Dependencies)
+아래 내용을 `requirements.txt`로 저장하고 `pip install -r requirements.txt` 명령어로 설치하세요.
 
 ```txt
 # Core Engine
@@ -26,8 +26,8 @@ streamlit>=1.30.0
 watchdog # for streamlit hot-reloading
 ```
 
-## Setup Instructions (for Home Machine)
-1. Install Python 3.10 (Recommended).
-2. Create virtual environment: `python -m venv venv`.
-3. Activate: `.\venv\Scripts\activate`.
-4. Install: `pip install -r requirements.txt`.
+## 설치 가이드 (Setup Instructions - 가정용 PC)
+1. Python 3.10 설치 (권장).
+2. 가상 환경 생성: `python -m venv venv`.
+3. 가상 환경 활성화: `.\venv\Scripts\activate`.
+4. 패키지 설치: `pip install -r requirements.txt`.

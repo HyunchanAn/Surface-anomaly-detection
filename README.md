@@ -1,59 +1,57 @@
-# Surface Anomaly Detection System
+# Surface Anomaly Detection System (표면 이상 탐지 시스템)
 
-## Project Overview
-This project implements a surface defect detection system using Deep Learning (Anomalib PatchCore).
-It is designed to run on a machine with a GPU (e.g., RTX 4060).
+## 프로젝트 개요
+이 프로젝트는 딥러닝(Anomalib PatchCore)을 활용한 표면 결함 탐지 시스템입니다.
+GPU(예: RTX 4060) 환경에서 최적화되어 있으며, 소량의 정상 이미지만으로도 이상 징후를 학습하고 탐지할 수 있습니다.
 
-## 🚀 Quick Start (On your Home Machine)
+## 🚀 빠른 시작 (Quick Start)
 
-### 1. Environment Setup
-Refer to `REQUIREMENTS.md` for detailed package installation.
+### 1. 환경 설정 (Environment Setup)
+`REQUIREMENTS.md`를 참고하여 필수 패키지를 설치하세요.
 ```bash
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Data Preparation
-You need about 50 "Good" (Normal) images of your surface (film, fabric, coating, etc.).
+### 2. 데이터 준비 (Data Preparation)
+약 50장의 "정상(Good)" 표면 이미지(필름, 직물, 코팅 등)가 필요합니다.
 
-**Option A: Use Your Own Data**
-1. Create a folder `datasets/raw_images`.
-2. Put your 50 normal images inside it.
-3. Run the helper script:
+**방법 A: 사용자 데이터 사용**
+1. `datasets/raw_images` 폴더를 생성합니다.
+2. 준비한 정상 이미지 50장을 해당 폴더에 넣습니다.
+3. 데이터 준비 스크립트를 실행합니다:
    ```bash
    python prepare_data.py
    ```
 
-**Option B: Auto-Download Sample Data (KolektorSDD)**
-If you don't have images yet, run:
+**방법 B: 샘플 데이터 자동 다운로드 (KolektorSDD)**
+이미지가 없다면 아래 명령어로 샘플 데이터를 다운로드할 수 있습니다:
 ```bash
 python prepare_data.py --download
 ```
-*This will download a sample surface dataset and organize it automatically.*
+*스크립트가 자동으로 데이터를 다운로드하고 `train/good` 및 `test/good`으로 분류합니다.*
 
-*This will automatically split them into `train/good` and `test/good`.*
+4. (선택 사항) 결함 이미지가 있다면 `datasets/custom/test/bad` 폴더에 직접 넣어 테스트할 수 있습니다.
 
-4. (Optional) If you have defect images, put them manually into `datasets/custom/test/bad`.
-
-### 3. Training
-Run the training script. It will load `configs/surface_config.yaml`.
+### 3. 학습 (Training)
+학습 스크립트를 실행합니다. 설정 파일은 `configs/surface_config.yaml`을 사용합니다.
 ```bash
 python train.py
 ```
-*On RTX 4060, this should take less than 1-2 minutes.*
-Artifacts/Model will be saved in `results/`.
+*RTX 4060 기준, 학습은 1~2분 내외로 완료됩니다.*
+학습된 모델과 결과물은 `results/` 폴더에 저장됩니다.
 
-### 4. Run Demo UI
-Start the web interface to visualize results.
+### 4. 데모 실행 (Web UI)
+Streamlit 웹 인터페이스를 통해 결과를 시각적으로 확인할 수 있습니다.
 ```bash
 streamlit run app.py
 ```
-Open your browser to `http://localhost:8501`.
+브라우저에서 `http://localhost:8501`로 접속하세요.
 
-## Directory Structure
-- `datasets/`: Data storage.
-- `configs/`: Model configuration (Hyperparameters).
-- `models/`: Where trained `.ckpt` files are saved.
-- `train.py`: Main training entry point.
-- `app.py`: Streamlit Web App.
+## 📂 폴더 구조 (Directory Structure)
+- `datasets/`: 데이터 저장소
+- `configs/`: 모델 설정 파일 (하이퍼파라미터 등)
+- `results/`: 학습 결과 및 모델(`.ckpt`) 저장 위치
+- `train.py`: 학습 실행 스크립트
+- `app.py`: Streamlit 웹 데모 앱

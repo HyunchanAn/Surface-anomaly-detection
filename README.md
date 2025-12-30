@@ -17,13 +17,22 @@ pip install -r requirements.txt
 ### 2. Data Preparation
 You need about 50 "Good" (Normal) images of your surface (film, fabric, coating, etc.).
 
+**Option A: Use Your Own Data**
 1. Create a folder `datasets/raw_images`.
 2. Put your 50 normal images inside it.
 3. Run the helper script:
    ```bash
    python prepare_data.py
    ```
-   *This will automatically split them into `train/good` and `test/good`.*
+
+**Option B: Auto-Download Sample Data (KolektorSDD)**
+If you don't have images yet, run:
+```bash
+python prepare_data.py --download
+```
+*This will download a sample surface dataset and organize it automatically.*
+
+*This will automatically split them into `train/good` and `test/good`.*
 
 4. (Optional) If you have defect images, put them manually into `datasets/custom/test/bad`.
 

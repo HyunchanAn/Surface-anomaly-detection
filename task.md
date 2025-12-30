@@ -8,7 +8,7 @@
 - [x] Anomalib 호환 데이터 폴더 구조 생성 (`datasets/custom/`) <!-- id: 2 -->
     - [x] `normal` (정상 이미지) 폴더 생성 <!-- id: 3 -->
     - [x] `abnormal` (불량 이미지) 폴더 생성 <!-- id: 4 -->
-- [x] (Optional) 샘플 데이터(KolektorSDD 등) 다운로드 스크립트 또는 가이드 제공 (`prepare_data.py`) <!-- id: 5 -->
+- [x] (Optional) 샘플 데이터(KolektorSDD 등) 다운로드 스크립트 또는 가이드 제공 (`prepare_data.py --download`) <!-- id: 5 -->
 
 ## Anomalib 설정 및 엔진 구축 (Engine Setup) [completed]
 - [x] PatchCore 모델 설정 파일 작성 (`configs/surface_anomaly.yaml`) <!-- id: 6 -->

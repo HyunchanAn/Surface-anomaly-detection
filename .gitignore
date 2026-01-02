@@ -12,6 +12,11 @@ datasets/raw_images/
 results/
 models/
 *.ckpt
+*.pt
+exported_models/
+*.log
+*_utf8.txt
+log*.txt
 
 # IDE
 .vscode/

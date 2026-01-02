@@ -1,44 +1,48 @@
 import os
 from anomalib.engine import Engine
-from anomalib.utils.configs import AnomalibConfig
-from pathlib import Path
+from anomalib.models import Patchcore
+from anomalib.data import Folder
 
 def train():
     print("[INFO] Starting Surface Anomaly Detection Training Pipeline...")
     
-    # 1. Config Load
-    config_path = Path("configs/surface_config.yaml")
-    if not config_path.exists():
-        print(f"[ERROR] Config file not found at {config_path}")
-        return
-
-    # Check data is ready
-    data_path = Path("datasets/custom/train/good") 
-    # NOTE: Anomalib folder dataset defaults to expecting 'train/good' structure.
-    # We might need to help the user rearrange if they just dumped pics in 'datasets/custom/normal'.
+    # 1. Setup Data
+    # Anomalib Folder Dataset
+    # We point to the root. It expects 'train' and 'test' subfolders.
+    datamodule = Folder(
+        name="surface",
+        root="datasets/custom",
+        normal_dir="train/good", 
+        abnormal_dir="test/bad",
+        normal_test_dir="test/good",
+        train_batch_size=8,
+        eval_batch_size=8
+    )
     
-    # Let's ensure output directory exists
-    os.makedirs("results", exist_ok=True)
-
-    print("[INFO] Loading Config and initializing Engine...")
-    # Initialize Engine
-    # Anomalib 1.0+ simplifies this. We can often just pass the config path to the CLI,
-    # but strictly in python:
-    engine = Engine(
-        config_path=str(config_path),
-        default_root_dir="results",
-        task="classification",  # or segmentation
+    # 2. Setup Model
+    print("[INFO] Initializing PatchCore Model...")
+    model = Patchcore(
+        backbone="wide_resnet50_2",
+        pre_trained=True,
+        coreset_sampling_ratio=0.1,
+        num_neighbors=9
     )
 
-    # 2. Train
+    # 3. Setup Engine
+    print("[INFO] Initializing Engine...")
+    engine = Engine(
+        default_root_dir="results",
+        max_epochs=1, 
+        logger=False, # Disable logger to avoid symlink issues on Windows without Admin/Dev mode
+    )
+
+    # 4. Train
     print("[INFO] Beginning Training (Fitting)...")
     try:
-        # If dataset structure is standard, this works automatically
-        engine.fit()
+        engine.fit(model=model, datamodule=datamodule)
         print("[SUCCESS] Training complete. Model saved in 'results/'.")
     except Exception as e:
         print(f"[ERROR] Training failed: {e}")
-        print("[TIP] Ensure your data is organized as: datasets/custom/train/good/coord_img_01.jpg")
 
 if __name__ == "__main__":
     train()

@@ -1,0 +1,10 @@
+anomalib[full]==1.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+openvino-dev>=2023.0
+pandas
+numpy
+matplotlib
+opencv-python
+streamlit>=1.30.0
+watchdog

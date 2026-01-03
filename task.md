@@ -4,7 +4,7 @@
 - [x] 프로젝트 기획서 및 폴더 구조 설계 (`implementation_plan.md`) <!-- id: 0 -->
 - [x] 개발 환경 설정 가이드 작성 (`REQUIREMENTS.md` or similar) <!-- id: 1 -->
 
-## 데이터셋 준비 (Data Preparation)
+## 데이터셋 준비 (Data Preparation) [completed]
 - [x] Anomalib 호환 데이터 폴더 구조 생성 (`datasets/custom/`) <!-- id: 2 -->
     - [x] `normal` (정상 이미지) 폴더 생성 <!-- id: 3 -->
     - [x] `abnormal` (불량 이미지) 폴더 생성 <!-- id: 4 -->
@@ -13,7 +13,6 @@
 ## Anomalib 설정 및 엔진 구축 (Engine Setup) [completed]
 - [x] PatchCore 모델 설정 파일 작성 (`configs/surface_anomaly.yaml`) <!-- id: 6 -->
 - [x] 학습 실행 스크립트 작성 (`train.py`) <!-- id: 7 -->
-- [ ] 추론(Inference) 테스트 스크립트 작성 (`inference.py` -> merged into app.py logic) <!-- id: 8 -->
 
 ## UI 개발 (Streamlit App) [in-progress]
 - [x] Streamlit 기본 레이아웃 구성 (`app.py`) <!-- id: 9 -->

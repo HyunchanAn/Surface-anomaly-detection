@@ -14,10 +14,7 @@ models/
 *.ckpt
 *.pt
 exported_models/
-*.log
-*_utf8.txt
-log*.txt
-
+logs/ # New location for log files
 # IDE
 .vscode/
 .idea/

@@ -134,20 +134,22 @@ if uploaded_file is not None:
                         # Inference
                         prediction = inferencer.predict(image=img_arr)
                         
-                        # Result handling
-                        # prediction.anomaly_map is usually a Torch Tensor
+                        # Extract components
                         heat_map = prediction.anomaly_map
                         if isinstance(heat_map, torch.Tensor):
-                             heat_map = heat_map.squeeze().cpu().numpy()
-
+                            heat_map = heat_map.squeeze().cpu().numpy()
+                        
+                        # Result handling
                         pred_score = prediction.pred_score
                         if isinstance(pred_score, torch.Tensor):
                             pred_score = pred_score.item()
                             
-                        pred_label_str = t["abnormal"] if prediction.pred_label else t["normal"]
+                        # Bug Fix: Use user-defined threshold instead of internal model default
+                        is_abnormal = pred_score > threshold
+                        pred_label_str = t["abnormal"] if is_abnormal else t["normal"]
                         
                         # Display Text Result
-                        if prediction.pred_label:
+                        if is_abnormal:
                             st.error(f"{t['result_label']}: {pred_label_str} (Score: {pred_score:.2f})")
                         else:
                             st.success(f"{t['result_label']}: {pred_label_str} (Score: {pred_score:.2f})")

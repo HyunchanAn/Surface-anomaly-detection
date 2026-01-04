@@ -8,7 +8,7 @@ venv/
 # Data & Results
 datasets/custom/
 !datasets/custom/.gitkeep
-datasets/raw_images/
+#datasets/raw_images/
 results/
 models/
 *.ckpt
